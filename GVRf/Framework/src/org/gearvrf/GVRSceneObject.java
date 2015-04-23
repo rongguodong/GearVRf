@@ -143,29 +143,76 @@ public class GVRSceneObject extends GVRHybridObject {
      * that, say, {@code sceneObject2} and {@code sceneObject3} are using the
      * same mesh as {@code sceneObject1}, and will only load the mesh once.
      * 
-     * @param context
+     * @param gvrContext
      *            current {@link GVRContext}.
      * @param mesh
      *            Basically, a stream containing a mesh file.
      * @param texture
      *            Basically, a stream containing a texture file. This can be
      *            either a compressed texture or a regular Android bitmap file.
-     *            
-     * @since 1.6.7            
+     * 
+     * @since 1.6.7
      */
-    public GVRSceneObject(GVRContext context, GVRAndroidResource mesh,
+    public GVRSceneObject(GVRContext gvrContext, GVRAndroidResource mesh,
             GVRAndroidResource texture) {
-        this(context);
+        this(gvrContext);
 
         // Create the render data
-        GVRRenderData renderData = new GVRRenderData(context);
+        GVRRenderData renderData = new GVRRenderData(gvrContext);
 
         // Set the mesh
-        renderData.setMesh(context.loadFutureMesh(mesh));
+        renderData.setMesh(gvrContext.loadFutureMesh(mesh));
 
         // Set the texture
-        Future<GVRTexture> futureTexture = context.loadFutureTexture(texture);
-        GVRMaterial material = new GVRMaterial(context);
+        Future<GVRTexture> futureTexture = gvrContext
+                .loadFutureTexture(texture);
+        GVRMaterial material = new GVRMaterial(gvrContext);
+        material.setMainTexture(futureTexture);
+        renderData.setMaterial(material);
+
+        // Attach the render data
+        attachRenderData(renderData);
+    }
+
+    /**
+     * Very high-level constructor that Constructs a rectangular scene object
+     * (specified by the width and height) and asynchronously loads the texture.
+     * 
+     * Note that because of <a href="package-summary.html#async">asynchronous
+     * request consolidation</a> you generally don't have to do anything special
+     * to create several objects that share the same mesh or texture: if you
+     * create all the objects in {@link GVRScript#onInit(GVRContext) onInit(),}
+     * the meshes and textures will generally <em>not</em> have loaded before
+     * your {@code onInit()} method finishes. Thus, the loading code will see
+     * that, say, {@code sceneObject2} and {@code sceneObject3} are using the
+     * same mesh as {@code sceneObject1}, and will only load the mesh once.
+     * 
+     * @param gvrContext
+     *            current {@link GVRContext}.
+     * @param width
+     *            the scene object's width
+     * @param height
+     *            the scene object's height
+     * @param texture
+     *            Basically, a stream containing a texture file. This can be
+     *            either a compressed texture or a regular Android bitmap file.
+     * 
+     * @since 1.6.7
+     */
+    public GVRSceneObject(GVRContext gvrContext, float width, float height,
+            GVRAndroidResource texture) {
+        this(gvrContext);
+
+        // Create the render data
+        GVRRenderData renderData = new GVRRenderData(gvrContext);
+
+        // Set the mesh
+        renderData.setMesh(gvrContext.createQuad(width, height));
+
+        // Set the texture
+        Future<GVRTexture> futureTexture = gvrContext
+                .loadFutureTexture(texture);
+        GVRMaterial material = new GVRMaterial(gvrContext);
         material.setMainTexture(futureTexture);
         renderData.setMaterial(material);
 
