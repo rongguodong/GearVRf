@@ -15,10 +15,9 @@
 
 package org.gearvrf;
 
-import org.gearvrf.utility.Exceptions;
-
-import android.util.Log;
 import static org.gearvrf.utility.Preconditions.*;
+
+import org.gearvrf.utility.Exceptions;
 
 /**
  * This is one of the key GVRF classes: It holds GL meshes.
@@ -30,19 +29,8 @@ public class GVRMesh extends GVRHybridObject {
         super(gvrContext, NativeMesh.ctor());
     }
 
-    private GVRMesh(GVRContext gvrContext, long ptr) {
+    GVRMesh(GVRContext gvrContext, long ptr) {
         super(gvrContext, ptr);
-    }
-
-    static GVRMesh factory(GVRContext gvrContext, long ptr) {
-        GVRHybridObject wrapper = wrapper(ptr);
-        return wrapper == null ? new GVRMesh(gvrContext, ptr)
-                : (GVRMesh) wrapper;
-    }
-
-    @Override
-    protected final boolean registerWrapper() {
-        return true;
     }
 
     /**
@@ -56,7 +44,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array with the packed vertex data.
      */
     public float[] getVertices() {
-        return NativeMesh.getVertices(getPtr());
+        return NativeMesh.getVertices(getNative());
     }
 
     /**
@@ -70,7 +58,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setVertices(float[] vertices) {
         checkValidFloatArray("vertices", vertices, 3);
-        NativeMesh.setVertices(getPtr(), vertices);
+        NativeMesh.setVertices(getNative(), vertices);
     }
 
     /**
@@ -82,7 +70,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array with the packed normal data.
      */
     public float[] getNormals() {
-        return NativeMesh.getNormals(getPtr());
+        return NativeMesh.getNormals(getNative());
     }
 
     /**
@@ -96,7 +84,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setNormals(float[] normals) {
         checkValidFloatArray("normals", normals, 3);
-        NativeMesh.setNormals(getPtr(), normals);
+        NativeMesh.setNormals(getNative(), normals);
     }
 
     /**
@@ -108,7 +96,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array with the packed texture coordinate data.
      */
     public float[] getTexCoords() {
-        return NativeMesh.getTexCoords(getPtr());
+        return NativeMesh.getTexCoords(getNative());
     }
 
     /**
@@ -122,7 +110,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setTexCoords(float[] texCoords) {
         checkValidFloatArray("texCoords", texCoords, 2);
-        NativeMesh.setTexCoords(getPtr(), texCoords);
+        NativeMesh.setTexCoords(getNative(), texCoords);
     }
 
     /**
@@ -137,7 +125,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array with the packed triangle index data.
      */
     public char[] getTriangles() {
-        return NativeMesh.getTriangles(getPtr());
+        return NativeMesh.getTriangles(getNative());
     }
 
     /**
@@ -155,7 +143,7 @@ public class GVRMesh extends GVRHybridObject {
     public void setTriangles(char[] triangles) {
         checkNotNull("triangles", triangles);
         checkDivisibleDataLength("triangles", triangles.length, 3);
-        NativeMesh.setTriangles(getPtr(), triangles);
+        NativeMesh.setTriangles(getNative(), triangles);
     }
 
     /**
@@ -167,7 +155,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array of {@code float} scalars.
      */
     public float[] getFloatVector(String key) {
-        return NativeMesh.getFloatVector(getPtr(), key);
+        return NativeMesh.getFloatVector(getNative(), key);
     }
 
     /**
@@ -181,7 +169,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setFloatVector(String key, float[] floatVector) {
         checkValidFloatVector("key", key, "floatVector", floatVector, 1);
-        NativeMesh.setFloatVector(getPtr(), key, floatVector);
+        NativeMesh.setFloatVector(getNative(), key, floatVector);
     }
 
     /**
@@ -193,7 +181,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array of two-component {@code float} vectors.
      */
     public float[] getVec2Vector(String key) {
-        return NativeMesh.getVec2Vector(getPtr(), key);
+        return NativeMesh.getVec2Vector(getNative(), key);
     }
 
     /**
@@ -208,7 +196,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setVec2Vector(String key, float[] vec2Vector) {
         checkValidFloatVector("key", key, "vec2Vector", vec2Vector, 2);
-        NativeMesh.setVec2Vector(getPtr(), key, vec2Vector);
+        NativeMesh.setVec2Vector(getNative(), key, vec2Vector);
     }
 
     /**
@@ -220,7 +208,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array of three-component {@code float} vectors.
      */
     public float[] getVec3Vector(String key) {
-        return NativeMesh.getVec3Vector(getPtr(), key);
+        return NativeMesh.getVec3Vector(getNative(), key);
     }
 
     /**
@@ -235,7 +223,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setVec3Vector(String key, float[] vec3Vector) {
         checkValidFloatVector("key", key, "vec3Vector", vec3Vector, 3);
-        NativeMesh.setVec3Vector(getPtr(), key, vec3Vector);
+        NativeMesh.setVec3Vector(getNative(), key, vec3Vector);
     }
 
     /**
@@ -247,7 +235,7 @@ public class GVRMesh extends GVRHybridObject {
      * @return Array of four-component {@code float} vectors.
      */
     public float[] getVec4Vector(String key) {
-        return NativeMesh.getVec4Vector(getPtr(), key);
+        return NativeMesh.getVec4Vector(getNative(), key);
     }
 
     /**
@@ -262,7 +250,7 @@ public class GVRMesh extends GVRHybridObject {
      */
     public void setVec4Vector(String key, float[] vec4Vector) {
         checkValidFloatVector("key", key, "vec4Vector", vec4Vector, 4);
-        NativeMesh.setVec4Vector(getPtr(), key, vec4Vector);
+        NativeMesh.setVec4Vector(getNative(), key, vec4Vector);
     }
 
     /**
@@ -280,7 +268,8 @@ public class GVRMesh extends GVRHybridObject {
      * @return A {@link GVRMesh} of the bounding box.
      */
     public GVRMesh getBoundingBox() {
-        return new GVRMesh(getGVRContext(), NativeMesh.getBoundingBox(getPtr()));
+        return new GVRMesh(getGVRContext(),
+                NativeMesh.getBoundingBox(getNative()));
     }
 
     private void checkValidFloatVector(String keyName, String key,
@@ -313,43 +302,39 @@ public class GVRMesh extends GVRHybridObject {
 }
 
 class NativeMesh {
-    public static native long ctor();
+    static native long ctor();
 
-    public static native float[] getVertices(long mesh);
+    static native float[] getVertices(long mesh);
 
-    public static native void setVertices(long mesh, float[] vertices);
+    static native void setVertices(long mesh, float[] vertices);
 
-    public static native float[] getNormals(long mesh);
+    static native float[] getNormals(long mesh);
 
-    public static native void setNormals(long mesh, float[] normals);
+    static native void setNormals(long mesh, float[] normals);
 
-    public static native float[] getTexCoords(long mesh);
+    static native float[] getTexCoords(long mesh);
 
-    public static native void setTexCoords(long mesh, float[] texCoords);
+    static native void setTexCoords(long mesh, float[] texCoords);
 
-    public static native char[] getTriangles(long mesh);
+    static native char[] getTriangles(long mesh);
 
-    public static native void setTriangles(long mesh, char[] triangles);
+    static native void setTriangles(long mesh, char[] triangles);
 
-    public static native float[] getFloatVector(long mesh, String key);
+    static native float[] getFloatVector(long mesh, String key);
 
-    public static native void setFloatVector(long mesh, String key,
-            float[] floatVector);
+    static native void setFloatVector(long mesh, String key, float[] floatVector);
 
-    public static native float[] getVec2Vector(long mesh, String key);
+    static native float[] getVec2Vector(long mesh, String key);
 
-    public static native void setVec2Vector(long mesh, String key,
-            float[] vec2Vector);
+    static native void setVec2Vector(long mesh, String key, float[] vec2Vector);
 
-    public static native float[] getVec3Vector(long mesh, String key);
+    static native float[] getVec3Vector(long mesh, String key);
 
-    public static native void setVec3Vector(long mesh, String key,
-            float[] vec3Vector);
+    static native void setVec3Vector(long mesh, String key, float[] vec3Vector);
 
-    public static native float[] getVec4Vector(long mesh, String key);
+    static native float[] getVec4Vector(long mesh, String key);
 
-    public static native void setVec4Vector(long mesh, String key,
-            float[] vec4Vector);
+    static native void setVec4Vector(long mesh, String key, float[] vec4Vector);
 
-    public static native long getBoundingBox(long mesh);
+    static native long getBoundingBox(long mesh);
 }

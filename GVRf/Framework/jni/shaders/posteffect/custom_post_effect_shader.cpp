@@ -93,8 +93,8 @@ void CustomPostEffectShader::addMat4Key(std::string variable_name,
 }
 
 void CustomPostEffectShader::render(
-        std::shared_ptr<RenderTexture> render_texture,
-        std::shared_ptr<PostEffectData> post_effect_data,
+        RenderTexture* render_texture,
+        PostEffectData* post_effect_data,
         std::vector<glm::vec3>& vertices, std::vector<glm::vec2>& tex_coords,
         std::vector<unsigned short>& triangles) {
     glUseProgram(program_->id());
@@ -139,8 +139,7 @@ void CustomPostEffectShader::render(
 
     for (auto it = texture_keys_.begin(); it != texture_keys_.end(); ++it) {
         glActiveTexture(getGLTexture(texture_index));
-        std::shared_ptr<Texture> texture = post_effect_data->getTexture(
-                it->second);
+        Texture* texture = post_effect_data->getTexture(it->second);
         glBindTexture(texture->getTarget(), texture->getId());
         glUniform1i(it->first, texture_index++);
     }
@@ -197,7 +196,7 @@ void CustomPostEffectShader::render(
 
     for (auto it = texture_keys_.begin(); it != texture_keys_.end(); ++it) {
         glActiveTexture(getGLTexture(texture_index));
-        std::shared_ptr<Texture> texture = post_effect_data->getTexture(
+        Texture> texture = post_effect_data-*getTexture(
                 it->second);
         glBindTexture(texture->getTarget(), texture->getId());
         glUniform1i(it->first, texture_index++);
