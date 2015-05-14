@@ -29,13 +29,14 @@
 #include "shaders/material/unlit_horizontal_stereo_shader.h"
 #include "shaders/material/unlit_shader.h"
 #include "shaders/material/unlit_vertical_stereo_shader.h"
+#include "shaders/material/lit_shader.h"
 #include "util/gvr_log.h"
 
 namespace gvr {
 class ShaderManager: public HybridObject {
 public:
     ShaderManager() :
-            HybridObject(), unlit_shader_(), unlit_horizontal_stereo_shader_(), unlit_vertical_stereo_shader_(), oes_shader_(), oes_horizontal_stereo_shader_(), oes_vertical_stereo_shader_(), error_shader_(), latest_custom_shader_id_(
+            HybridObject(), unlit_shader_(), unlit_horizontal_stereo_shader_(), unlit_vertical_stereo_shader_(), oes_shader_(), oes_horizontal_stereo_shader_(), oes_vertical_stereo_shader_(), lit_shader_(), error_shader_(), latest_custom_shader_id_(
                     INITIAL_CUSTOM_SHADER_INDEX), custom_shaders_() {
     }
     ~ShaderManager() {
@@ -84,6 +85,12 @@ public:
         }
         return oes_vertical_stereo_shader_;
     }
+    LitShader* getLitShader() {
+        if (!lit_shader_) {
+            lit_shader_ = new LitShader();
+        }
+        return lit_shader_;
+    }
     ErrorShader* getErrorShader() {
         if (!error_shader_) {
             error_shader_ = new ErrorShader();
@@ -122,6 +129,7 @@ private:
     OESShader* oes_shader_;
     OESHorizontalStereoShader* oes_horizontal_stereo_shader_;
     OESVerticalStereoShader* oes_vertical_stereo_shader_;
+    LitShader* lit_shader_;
     ErrorShader* error_shader_;
     int latest_custom_shader_id_;
     std::map<int, CustomShader*> custom_shaders_;

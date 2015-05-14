@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 /***************************************************************************
  * Renders a scene, a screen.
  ***************************************************************************/
@@ -47,56 +46,47 @@ class ShaderManager;
 
 class Renderer {
 private:
-    Renderer();
+	Renderer();
 
 public:
-    static void renderCamera(Scene* scene,
-            Camera* camera,
-            int framebufferId,
-            int viewportX, int viewportY, int viewportWidth, int viewportHeight,
-            ShaderManager* shader_manager,
-            PostEffectShaderManager* post_effect_shader_manager,
-            RenderTexture* post_effect_render_texture_a,
-            RenderTexture* post_effect_render_texture_b);
+	static void renderCamera(Scene* scene, Camera* camera, int framebufferId,
+			int viewportX, int viewportY, int viewportWidth, int viewportHeight,
+			ShaderManager* shader_manager,
+			PostEffectShaderManager* post_effect_shader_manager,
+			RenderTexture* post_effect_render_texture_a,
+			RenderTexture* post_effect_render_texture_b);
 
-    static void renderCamera(Scene* scene,
-            Camera* camera,
-            RenderTexture* render_texture,
-            ShaderManager* shader_manager,
-            PostEffectShaderManager* post_effect_shader_manager,
-            RenderTexture* post_effect_render_texture_a,
-            RenderTexture* post_effect_render_texture_b);
+	static void renderCamera(Scene* scene, Camera* camera,
+			RenderTexture* render_texture, ShaderManager* shader_manager,
+			PostEffectShaderManager* post_effect_shader_manager,
+			RenderTexture* post_effect_render_texture_a,
+			RenderTexture* post_effect_render_texture_b);
 
-    static void renderCamera(Scene* scene,
-            Camera* camera,
-            int viewportX, int viewportY, int viewportWidth, int viewportHeight,
-            ShaderManager* shader_manager,
-            PostEffectShaderManager* post_effect_shader_manager,
-            RenderTexture* post_effect_render_texture_a,
-            RenderTexture* post_effect_render_texture_b);
+	static void renderCamera(Scene* scene, Camera* camera, int viewportX,
+			int viewportY, int viewportWidth, int viewportHeight,
+			ShaderManager* shader_manager,
+			PostEffectShaderManager* post_effect_shader_manager,
+			RenderTexture* post_effect_render_texture_a,
+			RenderTexture* post_effect_render_texture_b);
 
-    static void renderCamera(Scene* scene,
-            Camera* camera,
-            RenderTexture* render_texture,
-            ShaderManager* shader_manager,
-            PostEffectShaderManager* post_effect_shader_manager,
-            RenderTexture* post_effect_render_texture_a,
-            RenderTexture* post_effect_render_texture_b,
-            glm::mat4 vp_matrix);
+	static void renderCamera(Scene* scene, Camera* camera,
+			RenderTexture* render_texture, ShaderManager* shader_manager,
+			PostEffectShaderManager* post_effect_shader_manager,
+			RenderTexture* post_effect_render_texture_a,
+			RenderTexture* post_effect_render_texture_b, glm::mat4 vp_matrix);
 
 private:
-    static void renderRenderData(RenderData* render_data,
-            const glm::mat4& vp_matrix, int render_mask,
-            ShaderManager* shader_manager);
-    static void renderPostEffectData(
-            RenderTexture* render_texture,
-            PostEffectData* post_effect_data,
-            PostEffectShaderManager* post_effect_shader_manager);
+	static void renderRenderData(RenderData* render_data,
+			const glm::mat4& view_matrix, const glm::mat4& projection_matrix,
+			int render_mask, ShaderManager* shader_manager);
+	static void renderPostEffectData(RenderTexture* render_texture,
+			PostEffectData* post_effect_data,
+			PostEffectShaderManager* post_effect_shader_manager);
 
-    Renderer(const Renderer& render_engine);
-    Renderer(Renderer&& render_engine);
-    Renderer& operator=(const Renderer& render_engine);
-    Renderer& operator=(Renderer&& render_engine);
+	Renderer(const Renderer& render_engine);
+	Renderer(Renderer&& render_engine);
+	Renderer& operator=(const Renderer& render_engine);
+	Renderer& operator=(Renderer&& render_engine);
 };
 
 }

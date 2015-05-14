@@ -41,7 +41,8 @@ public:
         UNLIT_VERTICAL_STEREO_SHADER = 2,
         OES_SHADER = 3,
         OES_HORIZONTAL_STEREO_SHADER = 4,
-        OES_VERTICAL_STEREO_SHADER = 5
+        OES_VERTICAL_STEREO_SHADER = 5,
+        LIT_SHADER = 6
     };
 
     explicit Material(ShaderType shader_type) :
