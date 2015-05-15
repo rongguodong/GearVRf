@@ -39,6 +39,7 @@ Java_org_gearvrf_NativeMeshEyePointee_setMesh(JNIEnv * env,
 JNIEXPORT jlong JNICALL
 Java_org_gearvrf_NativeMeshEyePointee_ctor(JNIEnv * env,
         jobject obj, jlong jmesh) {
+	LOGE("TESTTEST ava_org_gearvrf_NativeMeshEyePointee_ctor");
     std::shared_ptr<Mesh> mesh =
             *reinterpret_cast<std::shared_ptr<Mesh>*>(jmesh);
     return reinterpret_cast<jlong>(new std::shared_ptr<MeshEyePointee>(

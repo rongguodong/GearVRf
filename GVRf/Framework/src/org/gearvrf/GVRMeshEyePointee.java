@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-
 package org.gearvrf;
 
+import org.gearvrf.utility.Log;
 
 /**
  * An actual eye pointee.
@@ -46,7 +46,9 @@ public class GVRMeshEyePointee extends GVREyePointee {
      * 
      */
     public GVRMeshEyePointee(GVRContext gvrContext, GVRMesh mesh) {
-        super(gvrContext, NativeMeshEyePointee.ctor(mesh.getPtr()));
+        super(gvrContext, mesh == null ? null : NativeMeshEyePointee.ctor(mesh
+                .getPtr()));
+        Log.d("TESTTEST", "TESTTEST GVRMeshEyePointee.GVRMeshEyePointee");
     }
 
     /**

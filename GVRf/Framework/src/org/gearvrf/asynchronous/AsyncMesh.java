@@ -26,6 +26,8 @@ import org.gearvrf.asynchronous.Throttler.AsyncLoaderFactory;
 import org.gearvrf.asynchronous.Throttler.GlConverter;
 import org.gearvrf.utility.Log;
 
+import android.R.integer;
+
 /**
  * Async resource loading: meshes.
  * 

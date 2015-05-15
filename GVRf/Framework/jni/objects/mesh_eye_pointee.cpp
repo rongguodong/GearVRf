@@ -31,6 +31,7 @@
 namespace gvr {
 MeshEyePointee::MeshEyePointee(std::shared_ptr<Mesh>&& mesh) :
         EyePointee(), mesh_(std::move(mesh)) {
+	LOGE("TESTTEST MeshEyePointee::MeshEyePointee");
 }
 
 MeshEyePointee::~MeshEyePointee() {

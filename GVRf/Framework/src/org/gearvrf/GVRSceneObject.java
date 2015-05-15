@@ -20,6 +20,7 @@ import java.util.concurrent.Future;
 
 import org.gearvrf.GVRMaterial.GVRShaderType;
 import org.gearvrf.GVRMaterial.GVRShaderType.Unlit;
+import org.gearvrf.utility.Log;
 
 /**
  * One of the key GVRF classes: a scene object.
@@ -333,6 +334,7 @@ public class GVRSceneObject extends GVRHybridObject {
      *         data is currently attached to the object, returns {@code null}.
      */
     public GVRRenderData getRenderData() {
+        Log.d("TESTTEST", "TESTTEST GVRSceneObject.getRenderData");
         long ptr = NativeSceneObject.getRenderData(getPtr());
         return ptr == 0 ? null : GVRRenderData.factory(getGVRContext(), ptr);
     }

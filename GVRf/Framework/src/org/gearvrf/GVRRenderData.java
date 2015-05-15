@@ -17,6 +17,7 @@ package org.gearvrf;
 
 import java.util.concurrent.Future;
 
+import org.gearvrf.utility.Log;
 import org.gearvrf.utility.Threads;
 
 /**
@@ -103,6 +104,7 @@ public class GVRRenderData extends GVRComponent {
      * @return The {@link GVRMesh mesh} being rendered.
      */
     public GVRMesh getMesh() {
+        Log.d("TESTTEST", "TESTTEST GVRRenderData.getMesh");
         long ptr = NativeRenderData.getMesh(getPtr());
         return ptr == 0 ? null : GVRMesh.factory(getGVRContext(), ptr);
     }
